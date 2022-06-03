@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <form class="row bg-white p-3 mt-3 g-3" method='post'>
+      {% csrf_token %}
+      <div class="col-md-8">
+      <table class="table table-borderless ">
+         <tbody>
+            <tr>
+               <th scope="row" class="m-0">Product</th>
+               <td>{{order.product.name}}</td>
+            </tr>
+            <tr>
+               <th scope="row">Price</th>
+               <td>{{order.product.price}}</td>
+            </tr>
+            <tr>
+               <th scope="row">Status</th>
+               <td>{{form.status}} {{ form.errors}}</td>
+            </tr>
+            <tr>
+               <th></th>
+               <td><input type="submit" class='btn btn-success btn-sm mt-2' value='Update Order'></td>
+            </tr>
+         </tbody>
+         </table>
+         
+      </div>
+   </form>
+{% endblock content %}

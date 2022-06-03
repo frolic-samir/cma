@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <form class="row bg-white p-3 mt-3 g-3" method='post'>
+      {% csrf_token %}
+         {{ formset.management_form }}
+         {% for form in formset %}
+               <div class="col-md-3">
+                  <label class="form-label">{{form.product.label}}</label><br>
+                  <!-- {{form.product.value}} -->
+               </div>
+               <div class="col-md-3">
+                  <label class="form-label">{{form.status.label}}</label><br>
+                  {{form.status}}         
+               </div>
+               <div class="col-md-6"></div>
+         {% endfor %}
+         <div class="col-12">
+               <input type="submit" class='btn btn-success btn-sm mt-2' value='Create Order'>
+         </div>
+   </form>
+{% endblock content %}

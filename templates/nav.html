@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand ml-5">CMA</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+    {% if request.user.is_staff %}
+      <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" id='home' aria-current="page" href="{% url 'products:home' %}">Dashboard</a>
+        </li>    
+        <li class="nav-item">
+          <a class="nav-link" id='products' href="{% url 'products:product_list' %}">Products</a>
+        </li>
+      </ul>
+    {% endif %}
+      <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class='nav-link text-white'>Hello, {{request.user.username|default:'Guest'}}</a>
+        </li>    
+        {% if not request.user.is_staff %}
+          <li class="nav-item">
+            <a class='nav-link' href="{% url 'account' %}">Settings</a>
+          </li>    
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" id='products' href="{% url 'customer:logout' %}">Log Out</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

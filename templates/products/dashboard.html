@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include 'products/status.html' %}
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <h5>Customer</h5>
+            <hr>
+            <!-- <div class='border d-flex flex-fill'>
+                <a class='btn btn-primary btn-sm mb-1 flex-fill'>Create Customer</a>
+            </div> -->
+            <table class="table table-success table-striped">
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                </tr>
+                {% for c in customer %}
+                    <tr>
+                        <td><a class='btn btn-info btn-sm' href="{% url 'customer:customer_detail' c.id %}">View</a></td>
+                        <td> {{ c.name }} </a></td>
+                        <td> {{ c.contact }} </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="col-md-8">
+            <h5>Last 5 Orders</h5>
+            <hr>            
+            <table class="table table-success table-striped">
+                <tr>
+                    <th>Product</th>
+                    <th>Date Ordered</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                </tr>
+                {% for order in orders %}
+                    <tr>
+                        <td> {{ order.product.name }} </td>
+                        <td> {{ order.created_date|date }} </td>
+                        <td> {{ order.status }} </td>
+                        <td> <a href="{% url 'products:update_order' order.id %}" class='btn btn-sm btn-info'>Update</a> </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock content %}

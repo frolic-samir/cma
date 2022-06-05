@@ -18,4 +18,5 @@ urlpatterns =[
           name='password_reset_complete'),
 
      path('customer/<int:customer_id>/', v.customer_detail, name='customer_detail'),
+     path('customer/profile', v.customerProfile, name='customer_profile')
 ]

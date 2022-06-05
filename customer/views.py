@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 
 from .filter import FilterQuerySet
-from .forms import CustomerProfile, CreateUserForm, SignInForm
+from .forms import CustomerProfile, CreateUserForm, CustomerProfileForm, SignInForm
 from products.forms import SearchOrderForm
 
 def register(request):
@@ -23,7 +23,7 @@ def signIn(request):
       user = authenticate(username=data['username'],password=data['password'])
       if user is not None:
          login(request,user)
-         return redirect('products:home')
+         return redirect('products:admin_home')
       else:
          messages.error(request,"Invalid user")
    context = {
@@ -58,3 +58,17 @@ def customer_detail(request,customer_id):
       'form':search_form,
    }
    return render(request,'accounts/customers.html', context)
+
+def customerProfile(request):
+   user = request.user.customerprofile
+   form = CustomerProfileForm(instance=user)
+   if request.method == 'POST':
+      form = CustomerProfileForm(request.POST, request.FILES, instance=user)
+      if form.is_valid():
+         print(form.cleaned_data)
+         form.save()
+
+   context={
+      'form':form,
+   }
+   return render(request, 'accounts/customer_profile.html', context)

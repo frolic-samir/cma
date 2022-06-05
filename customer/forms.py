@@ -19,7 +19,7 @@ class CustomerProfileForm(forms.ModelForm):
    name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control form-control-sm'}))
    email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control form-control-sm'}))
    contact = forms.CharField(max_length=14,widget=forms.TextInput(attrs={'class':'form-control form-control-sm'}))
-   profile_pic = forms.FileField(widget=forms.FileInput(attrs={'class':'form-control form-control-sm'}))
+   profile_pic = forms.FileField(required=False, widget=forms.FileInput(attrs={'class':'form-control form-control-sm'}))
 
    class Meta:
       model    = CustomerProfile
